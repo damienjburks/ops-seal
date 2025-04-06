@@ -1,0 +1,29 @@
+name: Main Workflow
+on:
+  push:
+  
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  id-token: write
+  packages: write
+
+  
+jobs: 
+    build-image:
+        uses: ./.github/workflows/build-image.yml
+
+    lint-format:
+        uses: ./.github/workflows/lint-format.yml
+        needs: build-image
+    
+    unit-sec-scan:
+        uses: ./.github/workflows/unit-sec-test.yml
+        needs: lint-format
+    
+    push-docker-image:
+        uses: ./.github/workflows/push-docker-image.yml
+        needs: unit-sec-scan

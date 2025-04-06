@@ -1,0 +1,3 @@
+[MASTER]
+ignore=tests,.env
+disable=import-error,line-too-long
