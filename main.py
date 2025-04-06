@@ -3,7 +3,7 @@ Module containing examples of common vulnerabilities in web applications.
 """
 
 from fastapi import FastAPI, HTTPException
-import aioredis
+import redis.asyncio as redis
 
 app = FastAPI()
 
@@ -19,7 +19,7 @@ async def startup_event():
     Connect to Redis on startup.
     """
     global REDIS
-    REDIS = await aioredis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}")
+    REDIS = redis.Redis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}")
     print("Connected to Redis")
 
 
@@ -28,8 +28,9 @@ async def shutdown_event():
     """
     Disconnect from Redis on shutdown.
     """
-    await REDIS.close()
-    print("Disconnected from Redis")
+    if REDIS:
+        await REDIS.close()
+        print("Disconnected from Redis")
 
 
 @app.get("/")
