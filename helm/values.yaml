@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/damienjburks/ops-seal
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: false
+  host: opsseal.dsb-hub.local
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+resources: {}

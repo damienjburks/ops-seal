@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: ops-seal
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: ops-seal
+  template:
+    metadata:
+      labels:
+        app: ops-seal
+      annotations:
+        restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"  # Adds a timestamp
+    spec:
+      containers:
+      - name: ops-seal
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}
