@@ -32,6 +32,14 @@ async def shutdown_event():
     print("Disconnected from Redis")
 
 
+@app.get("/")
+async def root():
+    """
+    Root endpoint to check if the service is running.
+    """
+    return {"message": "Welcome to the Redis demo API!"}
+
+
 @app.post("/")
 async def write_to_redis(key: str, value: str):
     """
@@ -44,7 +52,7 @@ async def write_to_redis(key: str, value: str):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.get("/")
+@app.get("/{key}")
 async def read_from_redis(key: str):
     """
     Read a value from Redis by key.
