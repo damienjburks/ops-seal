@@ -11,6 +11,7 @@ service:
   targetPort: 8080
 
 ingress:
+  className: nginx
   enabled: true
   host: opsseal.dsb-hub.local
   annotations:
