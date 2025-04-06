@@ -12,14 +12,14 @@ permissions:
   security-events: write
   actions: read
 
-jobs: 
-    build-image:
-        uses: ./.github/workflows/build-image.yml
+jobs:
+  build-image:
+    uses: ./.github/workflows/build-image.yml
 
-    lint-format:
-        uses: ./.github/workflows/lint-format.yml
-        needs: build-image
-    
-    unit-sec-scan:
-        uses: ./.github/workflows/unit-sec-test.yml
-        needs: lint-format
+  lint-format:
+    uses: ./.github/workflows/lint-format.yml
+    needs: build-image
+
+  unit-sec-scan:
+    uses: ./.github/workflows/unit-sec-test.yml
+    needs: lint-format

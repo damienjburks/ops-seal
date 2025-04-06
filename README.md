@@ -1,85 +1,30 @@
-# Python FastAPI
+# 🦭 OpsSeal
 
-This project sets up a simple FastAPI application (with some vulnerabilites) within a Docker container. It uses the official Python runtime and includes all necessary configurations to deploy a FastAPI app with Docker. The container will expose the app on port 80 and automatically run the FastAPI app on startup.
+![Build Status](https://github.com/damienjburks/ops-seal/actions/workflows/main.yml/badge.svg?logo=github)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![FastAPI](https://img.shields.io/badge/made%20with-FastAPI-009688?logo=fastapi)
+![Redis](https://img.shields.io/badge/redis-integrated-red?logo=redis)
+![Vault](https://img.shields.io/badge/vault-enabled-black?logo=hashicorp)
+![Prototype](https://img.shields.io/badge/status-prototype-yellow)
 
-## Requirements
+> :construction: This repository is a WIP... and is completely experimental for me! :construction:
 
-- Docker
-- Python 3.12+
-- FastAPI
-- Uvicorn
+## 🚀 Overview
 
-## Features
+**OpsSeal** is a personal prototype application built with [FastAPI](https://fastapi.tiangolo.com/) that allows for quick testing and experimentation with various infrastructure tools like:
 
-- **Dockerized FastAPI application**: A containerized setup for easy deployment.
-- **Python 3.12.5 runtime**: Uses the latest stable Python version as a base.
-- **Efficient package installation**: Installs required dependencies via `requirements.txt`.
+- 🧠 **Redis Open Source** – for fast in-memory caching
+- 🔐 **HashiCorp Vault** – for secure secrets management
+- 🧰 Future tools (TBD) – expand and integrate as needed
 
-## Project Structure
+It’s meant to be a flexible, sandbox-style app for developing, testing, and playing with service integrations in a secure and structured way.
 
-```bash
-gcp-python-fastapi/
-├── Dockerfile
-├── requirements.txt
-├── main.py  # FastAPI app entry point
-└── ...
-```
+---
 
-- **Dockerfile**: Configures the Docker container for the FastAPI app.
-- **requirements.txt**: Specifies the required Python dependencies for the application.
-- **main.py**: The entry point for the FastAPI application (Make sure to include this file in the project structure).
+## 🛠 Features
 
-## Setup and Installation
-
-### 1. Clone the repository
-
-If you haven't cloned the project yet, use the following command:
-
-```bash
-git clone https://github.com/your-username/awesome-fastapi.git
-cd awesome-fastapi
-```
-
-### 2. Build the Docker image
-
-To build the Docker image, run the following command in the root of the project directory:
-
-```bash
-docker build -t awesome-fastapi .
-```
-
-### 3. Run the Docker container
-
-After the image is built, run the container:
-
-```bash
-docker run -d -p 80:80 awesome-fastapi
-```
-
-This command will run the FastAPI app on port 80 of your localhost.
-
-### 4. Access the app
-
-Once the container is running, you can access the FastAPI application by navigating to:
-
-```
-http://localhost:80
-```
-
-## Dependencies
-
-The project uses the following Python packages, which are listed in the `requirements.txt` file:
-
-- `fastapi`: The core framework for building the API.
-- `uvicorn`: ASGI server to run the FastAPI application.
-
-To install dependencies locally, use the following:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Notes
-
-- This setup assumes that your FastAPI app’s entry point is `main.py`, and the FastAPI application instance is named `app`. If your app is structured differently, you may need to modify the `CMD` directive in the Dockerfile accordingly.
-- The container will expose the application on port 80. If you want to use a different port, adjust the `EXPOSE` and `CMD` directives in the Dockerfile.
+- ✅ FastAPI backend
+- 🔐 Vault integration with dynamic secrets support
+- 💾 Redis caching and key/value storage
+- 🧪 Built for rapid prototyping and learning
+- 🧩 Modular design for easy tool add-ons
