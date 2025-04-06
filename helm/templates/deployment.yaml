@@ -22,3 +22,9 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.targetPort }}
+        env:
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis-oss
+                key: REDIS_PASSWORD

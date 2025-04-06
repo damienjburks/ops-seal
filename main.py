@@ -2,6 +2,7 @@
 Module containing examples of common vulnerabilities in web applications.
 """
 
+import os
 from fastapi import FastAPI, HTTPException
 import redis.asyncio as redis
 
@@ -10,17 +11,18 @@ app = FastAPI()
 # Initialize Redis connection
 REDIS_HOST = "redis-oss-master.redis.svc.cluster.local"
 REDIS_PORT = 6379
+REDIS_PASSWORD = os.environ["REDIS_PASSWORD"]
 REDIS = None
 
 
 @app.on_event("startup")
 async def startup_event():
     """
-    Connect to Redis on startup.
+    Connect to Redis on startup with authentication.
     """
     global REDIS
-    REDIS = redis.Redis.from_url(f"redis://{REDIS_HOST}:{REDIS_PORT}")
-    print("Connected to Redis")
+    REDIS = redis.Redis.from_url(f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}")
+    print("Connected to Redis with authentication")
 
 
 @app.on_event("shutdown")
