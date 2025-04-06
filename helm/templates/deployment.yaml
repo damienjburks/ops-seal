@@ -27,4 +27,4 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: redis-oss
-                key: REDIS_PASSWORD
+                key: redis-password
