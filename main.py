@@ -1,6 +1,7 @@
 """
 Module containing examples of common vulnerabilities in web applications.
 """
+
 from fastapi import FastAPI, HTTPException
 import redis.asyncio as redis
 
@@ -21,6 +22,7 @@ try:
 except FileNotFoundError:
     REDIS_PASSWORD = None
     print("Redis password file not found. Is Vault Agent Injector configured?")
+
 
 @app.on_event("startup")
 async def startup_event():
