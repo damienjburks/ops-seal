@@ -17,7 +17,7 @@ VAULT_SECRET_FILE = "/vault/secrets/redis-password"
 
 # Load Redis password from file
 try:
-    with open(VAULT_SECRET_FILE, "r") as f:
+    with open(VAULT_SECRET_FILE, "r", encoding="utf-8") as f:
         REDIS_PASSWORD = f.read().strip()
 except FileNotFoundError:
     REDIS_PASSWORD = None
