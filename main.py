@@ -1,8 +1,6 @@
 """
 Module containing examples of common vulnerabilities in web applications.
 """
-
-import os
 from fastapi import FastAPI, HTTPException
 import redis.asyncio as redis
 
@@ -11,9 +9,18 @@ app = FastAPI()
 # Initialize Redis connection
 REDIS_HOST = "redis-oss-master.redis.svc.cluster.local"
 REDIS_PORT = 6379
-REDIS_PASSWORD = os.environ["REDIS_PASSWORD"]
 REDIS = None
 
+# File path injected by Vault Agent
+VAULT_SECRET_FILE = "/vault/secrets/redis-password"
+
+# Load Redis password from file
+try:
+    with open(VAULT_SECRET_FILE, "r") as f:
+        REDIS_PASSWORD = f.read().strip()
+except FileNotFoundError:
+    REDIS_PASSWORD = None
+    print("Redis password file not found. Is Vault Agent Injector configured?")
 
 @app.on_event("startup")
 async def startup_event():
@@ -49,8 +56,8 @@ async def write_to_redis(key: str, value: str):
     Write a key-value pair to Redis.
     """
     try:
-        await REDIS.set(key, value)
-        return {"message": f"Key '{key}' set successfully"}
+        await REDIS.set(key, value, ex=3600)  # Set a TTL of 3600 seconds (1 hour)
+        return {"message": f"Key '{key}' set successfully with a TTL of 1 hour"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
