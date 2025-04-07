@@ -21,6 +21,12 @@ spec:
           {{`{{- with secret "kv/data/secret/redis" -}}`}}
           {{`{{ .Data.data.password }}`}}
           {{`{{- end }}`}}
+        vault.hashicorp.com/agent-inject-secret-mysql-creds: "database/creds/ops-seal-db-role"
+        vault.hashicorp.com/agent-inject-template-mysql-creds: |
+          {{`{{- with secret "database/creds/ops-seal-db-role" -}}`}}
+          {{`username={{ .Data.username }}`}}
+          {{`password={{ .Data.password }}`}}
+          {{`{{- end }}`}}
         restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"
     spec:
       serviceAccountName: ops-seal
