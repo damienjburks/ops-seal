@@ -16,7 +16,7 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "ops-seal"
-        vault.hashicorp.com/agent-inject-secret-redis-password: "secret/data/redis"
+        vault.hashicorp.com/agent-inject-secret-redis-password: "kv/data/secret/redis"
         vault.hashicorp.com/agent-inject-template-redis-password: |
           {{`{{- with secret "secret/data/redis" -}}`}}
           {{`{{ .Data.data.password }}`}}
