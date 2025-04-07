@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  annotations:
   labels:
     app: ops-seal
 spec:
@@ -22,8 +21,10 @@ spec:
           {{`{{- with secret "secret/data/redis" -}}`}}
           {{`{{ .Data.data.password }}`}}
           {{`{{- end }}`}}
-        restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"  # Adds a timestamp
+        restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"
     spec:
+      serviceAccountName: ops-seal
+      automountServiceAccountToken: true
       containers:
       - name: ops-seal
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
