@@ -12,7 +12,7 @@ import redis.asyncio as redis
 app = FastAPI()
 
 # Initialize MySQL connection
-MYSQL_HOST = "mysql-0.db.svc.cluster.local"
+MYSQL_HOST = "mysql.db.svc.cluster.local"
 MYSQL_PORT = 3306
 MYSQL = None
 
