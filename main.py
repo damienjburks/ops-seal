@@ -68,7 +68,7 @@ async def startup_event():
         host=MYSQL_HOST,
         user=creds["username"],
         password=creds["password"],
-        database="ops-seal",
+        database="ops_seal",
         port=MYSQL_PORT,
     )
     if MYSQL.is_connected():
