@@ -132,7 +132,7 @@ async def read_from_redis(request: Request, key: str):
         ip_address=request.client.host,
         user_agent=request.headers.get("user-agent"),
         headers=dict(request.headers),
-        request_body=await request.json(),
+        request_body=None,
         response_status=200,
         interacted_by=None,  # Replace with actual user if available
     )
@@ -158,7 +158,7 @@ async def delete_from_redis(request: Request, key: str):
         ip_address=request.client.host,
         user_agent=request.headers.get("user-agent"),
         headers=dict(request.headers),
-        request_body=await request.json(),
+        request_body=None,
         response_status=200,
         interacted_by=None,  # Replace with actual user if available
     )
