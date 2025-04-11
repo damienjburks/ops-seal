@@ -13,14 +13,15 @@ service:
 ingress:
   className: nginx
   enabled: true
-  host: opsseal.dsb-hub.local
+  host: ops-seal.dsb-hub.local
   annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: mkcert-issuer
   tls:
     enabled: true
-    host: dsb-hub.local  
-    secretName: letsencrypt-prod
+    host: ops-seal.dsb-hub.local  
+    secretName: dsb-hub-wildcard-tls
 
 resources: {}
