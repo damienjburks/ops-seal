@@ -17,8 +17,10 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
   tls:
-    enabled: false
-    secretName: dsb-hub-tls
+    enabled: true
+    host: dsb-hub.local  
+    secretName: letsencrypt-prod
 
 resources: {}
