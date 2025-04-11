@@ -18,7 +18,6 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    cert-manager.io/cluster-issuer: mkcert-issuer
   tls:
     enabled: true
     host: ops-seal.dsb-hub.local  
