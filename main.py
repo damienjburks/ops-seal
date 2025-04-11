@@ -113,7 +113,7 @@ async def write_to_redis(request: Request):
 
     try:
         await REDIS.set(
-            json_body["key"], json_body["value"], ex=3600
+            json_body["key"], json_body["value"], ex=3600, keepttl=True
         )  # Set a TTL of 3600 seconds (1 hour)
         return {"message": f"Key '{key}' set successfully with a TTL of 1 hour"}
     except Exception as e:
