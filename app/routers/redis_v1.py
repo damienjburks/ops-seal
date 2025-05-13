@@ -4,8 +4,8 @@ This module defines the API endpoints for interacting with Redis.
 """
 
 import logging
+import redis
 from fastapi import APIRouter, HTTPException
-from redis import ConnectionError
 from app.clients.redis_client import RedisClient  # Import the RedisClient class
 
 redis_router = APIRouter(prefix="/api/v1/redis", tags=["Redis"])
@@ -22,7 +22,7 @@ async def startup_event():
     try:
         await REDIS_CLIENT.connect()
         logging.info("Redis client connected successfully")
-    except ConnectionError:
+    except redis.ConnectionError:
         logging.error("Failed to connect to Redis")
         raise HTTPException(status_code=500, detail="Failed to connect to Redis")
 
