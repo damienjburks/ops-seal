@@ -7,7 +7,7 @@ It serves as the entry point for the application.
 
 import logging
 import uvicorn
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from utils.cron import DefaultScheduler
 from routers.redis_v1 import redis_router
 from routers.tfc_v1 import tfc_router
