@@ -103,11 +103,9 @@ async def root():
     """
     Root endpoint to check if the service is running.
     """
-    print(os.environ["TFC_TOKEN"])
     return {
         "message": "It's ALIVE!",
         "status": "running",
-        "token": os.environ["TFC_TOKEN"],
     }
 
 
