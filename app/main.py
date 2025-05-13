@@ -2,6 +2,7 @@
 Module containing examples of common vulnerabilities in web applications.
 """
 
+import os
 import json
 import mysql.connector
 from mysql.connector import Error
@@ -9,7 +10,19 @@ from mysql.connector import Error
 from fastapi import FastAPI, HTTPException, Request
 import redis.asyncio as redis
 
-app = FastAPI()
+app = FastAPI(
+    title="Ops-Seal",
+    description="An API demonstrating interactions with Redis and MySQL, including event logging.",
+    version="1.0.0",
+    contact={
+        "name": "Damien Burks",
+        "email": "damien@devsecblueprint.com",
+    },
+    license_info={
+        "name": "MIT License",
+        "url": "https://opensource.org/licenses/MIT",
+    },
+)
 
 # Initialize MySQL connection
 MYSQL_HOST = "mysql.db.svc.cluster.local"
@@ -90,7 +103,12 @@ async def root():
     """
     Root endpoint to check if the service is running.
     """
-    return {"message": "Welcome to the Redis demo API!"}
+    print(os.environ["TFC_TOKEN"])
+    return {
+        "message": "It's ALIVE!",
+        "status": "running",
+        "token": os.environ["TFC_TOKEN"],
+    }
 
 
 @app.post("/")
