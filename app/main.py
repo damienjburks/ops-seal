@@ -2,7 +2,6 @@
 Module containing examples of common vulnerabilities in web applications.
 """
 
-import os
 import json
 import mysql.connector
 from mysql.connector import Error
