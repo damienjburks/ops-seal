@@ -48,6 +48,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
-        - env:
-          - name: BASH_ENV
-            value: /vault/secrets/config
+          env:
+            - name: BASH_ENV
+              value: /vault/secrets/config
