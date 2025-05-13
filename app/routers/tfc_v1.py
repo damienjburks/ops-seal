@@ -10,7 +10,7 @@ from clients.tfc_client import TfcClient
 tfc_router = APIRouter(prefix="/api/v1/tfc", tags=["Redis"])
 
 
-@tfc_router.post("/start-processing-job")
+@tfc_router.post("/run-processing-job")
 async def run_processing_job():
     """
     Run a processing job for the TFC client.
