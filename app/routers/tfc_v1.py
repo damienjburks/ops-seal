@@ -11,12 +11,12 @@ tfc_router = APIRouter(prefix="/api/v1/tfc", tags=["Redis"])
 
 
 @tfc_router.post("/start-processing-job")
-async def start_processing_job():
+async def run_processing_job():
     """
-    Start a processing job for the TFC client.
+    Run a processing job for the TFC client.
     """
     try:
         TfcClient().run()
-        return {"message": "Processing job started successfully"}
+        return {"message": "Processing job is completed."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
