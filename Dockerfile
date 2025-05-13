@@ -14,10 +14,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the current directory contents into the container
-COPY /app /app/
+COPY /app .
+
+# Set the PYTHONPATH to include the /app directory
+ENV PYTHONPATH=/app
 
 # Expose port 8080 to the outside world
 EXPOSE 8080
 
 # Run app.py when the container launches
-CMD ["python", "/app/main.py"]
+CMD ["python", "main.py"]
