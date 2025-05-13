@@ -5,8 +5,8 @@ This module provides a DefaultScheduler class that uses APScheduler to run jobs 
 
 import logging
 from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.triggers.interval import IntervalTrigger
 from clients.tfc_client import TfcClient
+from apscheduler.triggers.cron import CronTrigger
 
 
 class DefaultScheduler:
@@ -31,7 +31,7 @@ class DefaultScheduler:
         logging.info("Starting scheduler...")
         self.scheduler.add_job(
             self._run_tfc_client,
-            trigger=IntervalTrigger(hours=self.interval_hours),
+            trigger=CronTrigger(hour=22, minute=0, timezone="America/Chicago"),
             id="tfc_client_job",
             replace_existing=True,
         )
