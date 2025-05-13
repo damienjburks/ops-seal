@@ -224,7 +224,7 @@ class TfcClient:
                 )
                 continue
 
-            logging.info("  ▶️ Processing workspace: %s (ID: %s)", ws_name, ws_id)
+            logging.info("▶️ Processing workspace: %s (ID: %s)", ws_name, ws_id)
 
             try:
                 # Check if the last apply was a destroy

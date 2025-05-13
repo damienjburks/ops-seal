@@ -16,8 +16,7 @@ async def start_processing_job():
     Start a processing job for the TFC client.
     """
     try:
-        # Assuming you have a function to start the processing job
-        await TfcClient().run()
+        TfcClient().run()
         return {"message": "Processing job started successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
