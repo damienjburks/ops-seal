@@ -6,6 +6,7 @@ It serves as the entry point for the application.
 """
 
 import logging
+import uvicorn
 from fastapi import FastAPI, APIRouter
 from utils.cron import DefaultScheduler
 from routers.redis_v1 import redis_router
@@ -51,3 +52,12 @@ async def root():
     Root endpoint to check if the service is running.
     """
     return {"message": "It's ALIVE!", "status": "running"}
+
+if __name__ == "__main__":
+    uvicorn.run(app,
+        host="0.0.0.0",
+        port=8080, 
+        log_level="info",
+        reload=True,
+        use_colors=True,
+    )
