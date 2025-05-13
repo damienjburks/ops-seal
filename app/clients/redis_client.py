@@ -4,7 +4,7 @@ This module provides a Redis client for connecting to a Redis database.
 """
 
 import redis
-from app.utils.secrets import VaultSecretsLoader
+from utils.secrets import VaultSecretsLoader
 
 
 class RedisClient:

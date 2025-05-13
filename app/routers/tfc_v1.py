@@ -5,7 +5,7 @@ This module defines the API endpoints for interacting with the TFC client.
 
 from fastapi import APIRouter, HTTPException
 
-from app.clients.tfc_client import TfcClient
+from clients.tfc_client import TfcClient
 
 tfc_router = APIRouter(prefix="/api/v1/tfc", tags=["Redis"])
 

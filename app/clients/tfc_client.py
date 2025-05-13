@@ -9,7 +9,7 @@ import time
 import logging
 import traceback
 import requests
-from app.utils.secrets import VaultSecretsLoader
+from utils.secrets import VaultSecretsLoader
 
 
 class TfcClient:

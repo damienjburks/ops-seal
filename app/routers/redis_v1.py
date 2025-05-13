@@ -6,7 +6,7 @@ This module defines the API endpoints for interacting with Redis.
 import logging
 import redis
 from fastapi import APIRouter, HTTPException
-from app.clients.redis_client import RedisClient  # Import the RedisClient class
+from clients.redis_client import RedisClient  # Import the RedisClient class
 
 redis_router = APIRouter(prefix="/api/v1/redis", tags=["Redis"])
 
