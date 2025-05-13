@@ -3,6 +3,7 @@ Redis Client Module
 This module provides a Redis client for connecting to a Redis database.
 """
 
+import logging
 import redis
 from utils.secrets import VaultSecretsLoader
 
@@ -44,9 +45,11 @@ class RedisClient:
         )
         try:
             await self.client.ping()
-            print("Connected to Redis")
-        except redis.ConnectionError:
-            print("Failed to connect to Redis")
+        except redis.ConnectionError as e:
+            logging.error("Failed to connect to Redis")
+            raise redis.ConnectionError("Failed to connect to Redis") from e
+
+        logging.info("Connected to Redis")
 
     async def close(self):
         """
@@ -57,4 +60,4 @@ class RedisClient:
         """
         if self.client:
             await self.client.close()
-            print("Disconnected from Redis")
+            logging.info("Redis client closed")

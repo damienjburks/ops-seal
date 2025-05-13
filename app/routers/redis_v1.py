@@ -21,10 +21,11 @@ async def startup_event():
     """
     try:
         await REDIS_CLIENT.connect()
-        logging.info("Redis client connected successfully")
     except redis.ConnectionError:
         logging.error("Failed to connect to Redis")
         raise HTTPException(status_code=500, detail="Failed to connect to Redis")
+
+    logging.info("Redis client connected successfully")
 
 
 @redis_router.on_event("shutdown")
