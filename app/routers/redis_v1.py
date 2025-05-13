@@ -7,6 +7,7 @@ from fastapi import APIRouter, Request, HTTPException
 
 redis_router = APIRouter(prefix="/api/v1/redis", tags=["Redis"])
 
+REDIS_CLIENT = None
 
 @redis_router.post("/")
 async def write_to_redis(request: Request):

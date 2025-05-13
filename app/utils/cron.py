@@ -7,7 +7,6 @@ import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from app.clients.tfc_client import TfcClient
-from app.utils.secrets import VaultSecretsLoader
 
 
 class DefaultScheduler:
@@ -38,7 +37,7 @@ class DefaultScheduler:
         )
         self.scheduler.start()
         logging.info("Scheduler started.")
-        logging.info(f"Scheduler will run every {self.interval_hours} hours.")
+        logging.info("Scheduler will run every %d hours.", self.interval_hours)
 
     def _run_tfc_client(self):
         """
@@ -48,5 +47,5 @@ class DefaultScheduler:
         try:
             TfcClient().run()
             logging.info("TfcClient run completed successfully.")
-        except Exception as e:
-            logging.error(f"Error running TfcClient: {e}")
+        except RuntimeError as e:  # Replace with a more specific exception if applicable
+            logging.error("Error running TfcClient: %s", e)
