@@ -34,9 +34,9 @@ spec:
 
         # Terraform Cloud credentials
         vault.hashicorp.com/agent-inject-template-config-tfc-creds: |
-          {{`{{- with secret "kv/data/secret/terraform-cloud" -}}`}}
-          {{`export TFC_TOKEN={{ .Data.data.token }}`}}
-          {{`{{- end }}`}}
+          {{- with secret "kv/data/secret/terraform-cloud" -}}
+            export TFC_TOKEN={{ .Data.data.token }}
+          {{- end }}
         
         restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"
     spec:
