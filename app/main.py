@@ -37,21 +37,18 @@ app = FastAPI(
 scheduler = DefaultScheduler(interval_hours=24)
 scheduler.start()
 
-# Routers
-root_router = APIRouter()
 
-# Include routers
-app.include_router(root_router)
-app.include_router(redis_router)
-app.include_router(tfc_router)
-
-
-@root_router.get("/")
+@app.get("/")
 async def root():
     """
     Root endpoint to check if the service is running.
     """
     return {"message": "It's ALIVE!", "status": "running"}
+
+
+# Include routers
+app.include_router(redis_router)
+app.include_router(tfc_router)
 
 
 if __name__ == "__main__":
