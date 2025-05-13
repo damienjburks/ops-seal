@@ -4,6 +4,7 @@ This module provides a Redis client for connecting to a Redis database.
 """
 
 import redis
+from app.utils.secrets import VaultSecretsLoader
 
 
 class RedisClient:
@@ -14,7 +15,7 @@ class RedisClient:
     It uses asynchronous operations to ensure non-blocking behavior.
     """
 
-    def __init__(self, host, port, password):
+    def __init__(self, host="redis-oss-master.redis.svc.cluster.local", port=6379):
         """
         Initializes the RedisClient instance.
 
@@ -25,7 +26,7 @@ class RedisClient:
         """
         self.host = host
         self.port = port
-        self.password = password
+        self.password = VaultSecretsLoader().load_secret("redis-password")
         self.client = None
 
     async def connect(self):

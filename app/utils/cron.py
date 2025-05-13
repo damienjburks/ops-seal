@@ -47,5 +47,7 @@ class DefaultScheduler:
         try:
             TfcClient().run()
             logging.info("TfcClient run completed successfully.")
-        except RuntimeError as e:  # Replace with a more specific exception if applicable
+        except (
+            RuntimeError
+        ) as e:  # Replace with a more specific exception if applicable
             logging.error("Error running TfcClient: %s", e)
