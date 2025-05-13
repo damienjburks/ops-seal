@@ -20,4 +20,4 @@ COPY /app /app/
 EXPOSE 8080
 
 # Run app.py when the container launches
-CMD ["python", "/app/app.py"]
+CMD ["python", "/app/main.py"]
