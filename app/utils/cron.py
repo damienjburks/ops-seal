@@ -5,8 +5,8 @@ This module provides a DefaultScheduler class that uses APScheduler to run jobs 
 
 import logging
 from apscheduler.schedulers.background import BackgroundScheduler
-from clients.tfc_client import TfcClient
 from apscheduler.triggers.cron import CronTrigger
+from clients.tfc_client import TfcClient
 
 
 class DefaultScheduler:
