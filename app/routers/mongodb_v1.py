@@ -46,7 +46,7 @@ async def insert_document(collection: str, document: dict):
 
 
 @mongodb_router.get("/find/{collection}")
-async def find_documents(collection: str, query: dict = {}):
+async def find_documents(collection: str, query: dict):
     """
     Find documents in a MongoDB collection matching a query.
     """
