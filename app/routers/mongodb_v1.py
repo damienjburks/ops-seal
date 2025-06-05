@@ -4,7 +4,7 @@ This module defines the API endpoints for interacting with MongoDB.
 """
 
 from fastapi import APIRouter, HTTPException
-from app.clients.mongodb_client import MongoDBClient
+from clients.mongodb_client import MongoDBClient
 
 mongodb_router = APIRouter(prefix="/api/v1/mongodb", tags=["MongoDB"])
 
