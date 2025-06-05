@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from utils.cron import DefaultScheduler
 from routers.redis_v1 import redis_router
 from routers.tfc_v1 import tfc_router
+from routers.mongodb_v1 import mongodb_router
 
 
 logging.basicConfig(
@@ -49,7 +50,7 @@ async def root():
 # Include routers
 app.include_router(redis_router)
 app.include_router(tfc_router)
-
+app.include_router(mongodb_router)
 
 if __name__ == "__main__":
     uvicorn.run(
