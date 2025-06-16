@@ -1,26 +1,39 @@
-# Use an official Python runtime as a parent image
-FROM python:3.12.5-bullseye
+# -----------------------------------------------------------------------------
+# Multi-stage Dockerfile for the ops-seal FastAPI application
+# -----------------------------------------------------------------------------
+# Stage 1: Build environment (install dependencies in a virtual environment)
+FROM cgr.dev/chainguard/python:latest-dev as dev
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install system dependencies if needed, 
-# not supported by Nexus unfortunately
-RUN apt-get update -y
-RUN apt upgrade -y
+# Create a Python virtual environment in /app/venv
+RUN python -m venv venv
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Add the virtual environment's bin directory to PATH
+ENV PATH="/app/venv/bin":$PATH
 
-# Copy the current directory contents into the container
+# Copy the requirements file into the container
+COPY requirements.txt requirements.txt
+
+# Install Python dependencies into the virtual environment
+RUN pip install -r requirements.txt
+
+# -----------------------------------------------------------------------------
+# Stage 2: Production image (copy only necessary files and the venv)
+FROM cgr.dev/chainguard/python:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application code from the build stage
 COPY /app .
 
-# Set the PYTHONPATH to include the /app directory
-ENV PYTHONPATH=/app
+# Copy the virtual environment from the build stage
+COPY --from=dev /app/venv /app/venv
 
-# Expose port 8080 to the outside world
-EXPOSE 8080
+# Set the virtual environment's bin directory in PATH
+ENV PATH="/app/venv/bin:$PATH"
 
-# Run app.py when the container launches
-CMD ["python", "main.py"]
+# Set the default command to run the application
+ENTRYPOINT ["python", "main.py"]
