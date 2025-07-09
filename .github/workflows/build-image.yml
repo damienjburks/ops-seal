@@ -12,6 +12,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Docker Image
+      - name: Build Multi-Arch Docker Image
         run: |
-          docker build -t ops-seal:${{ github.sha }} .
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          -t ops-seal:${{ github.sha }} .
