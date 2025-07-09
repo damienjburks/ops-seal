@@ -38,7 +38,9 @@ jobs:
       # Build and tag Docker Image
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
+          docker buildx build \
+          --platform linux/amd64,linux/arm64 \
+          -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
 
       - name: Tag Docker Image
         run: |
