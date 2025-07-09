@@ -36,17 +36,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and tag Docker Image
-      - name: Build Docker Image
+      - name: Build & Push Multi-Arch Docker Image
         run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
-          -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} .
-
-      - name: Tag Docker Image
-        run: |
-          docker tag ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
-
-      # Push the Docker image to the registry
-      - name: Push Docker Image to GHCR
-        run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+          -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest \
+          --push \
+          .
