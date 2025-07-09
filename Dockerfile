@@ -2,7 +2,7 @@
 # Multi-stage Dockerfile for the ops-seal FastAPI application
 # -----------------------------------------------------------------------------
 # Stage 1: Build environment (install dependencies in a virtual environment)
-FROM cgr.dev/chainguard/python:latest-dev as dev
+FROM cgr.dev/chainguard/python:latest-dev AS dev
 
 # Set the working directory inside the container
 WORKDIR /app
