@@ -35,7 +35,6 @@ class TfcClient:
         }
         self.org_list = ["DSB", "DJB-Personal"]
         self.exclude_workspaces = {
-            "DSB": ["discord-bot", "discord-bot-repositories"],
             "DJB-Personal": ["openvpn-server"],
         }
 

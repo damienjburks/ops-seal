@@ -42,7 +42,7 @@ spec:
         restartedAt: "{{ now | date "2006-01-02T15:04:05Z07:00" }}"
     spec:
       serviceAccountName: ops-seal
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       containers:
         - name: ops-seal
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
