@@ -36,7 +36,7 @@ class TfcClient:
         self.org_list = ["DSB", "DJB-Personal"]
         self.exclude_workspaces = {
             "DJB-Personal": ["openvpn-server"],
-             "DSB": ["azure-devsecops-pipelines"]
+            "DSB": ["azure-devsecops-pipelines"],
         }
 
     def get_workspaces(self, org_name):
